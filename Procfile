@@ -1,1 +1,1 @@
-web: ng build --prod
+web: ng build
