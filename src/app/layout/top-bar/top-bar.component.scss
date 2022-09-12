@@ -1,0 +1,35 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10rem 1rem 1rem 1rem;
+  width: 100%;
+
+  & .right {
+    width: 30%;
+  }
+
+  & .left {
+    width: 70%;
+  }
+
+  & .right,
+  & .left {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 7rem;
+      }
+    }
+  }
+}
