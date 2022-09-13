@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./src/assets/styles/style";
+
+* {
+  color: $text-color;
+  background: transparent;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
