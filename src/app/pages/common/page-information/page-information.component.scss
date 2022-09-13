@@ -1,0 +1,140 @@
+@import "./src/assets/styles/style";
+@font-face {
+  font-family: "socialmedia";
+  src: url(/assets/fonts/Social.otf);
+@import '~bootstrap/dist/css/bootstrap.css';
+}
+
+//@font-face {
+//font-family: "Dunkin";
+//}
+
+#logo {
+  max-height: 100px;
+
+  max-width: 80px;
+
+  padding: 0.1rem;
+}
+#carousel {
+  position: relative;
+}
+.img_carrusel {
+  height: 120vh;
+  width: auto;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: rgb(255, 255, 255);
+  font-family: "Segoe UI";
+}
+
+#autos {
+  padding-top: 20px;
+}
+footer {
+  background-color: $primary-color;
+}
+footer a {
+  color: rgb(134, 120, 120);
+}
+
+#navllamada {
+  font-size: large;
+  color: rgb(229, 227, 218);
+  font-weight: bolder;
+}
+.titulo {
+  text-shadow: 1px 1px 1px rgb(40, 51, 14), 2px 1px 1px rgb(14, 3, 1);
+  padding: 2.0rem;
+}
+
+main #carousel img {
+  max-height: 85vh;
+  object-fit: cover;
+}
+#imagen_cont {
+  height: 15rem;
+  width: 20rem;
+  border-radius: 20px
+}
+#NAV {
+  background-color:$primary-color;
+}
+#LETRAS {
+  color: rgb(0, 0, 0);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 2.1rem;
+}
+#navbarSupportedContent {
+  display:flex;
+
+}
+
+.container_iconos_redes {
+  border-top: 1px solid white;
+}
+.container_redes {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  color: white;
+}
+.titulo_redes {
+  color:$secondary-color;
+}
+.list-unstyled * {
+  color: white;
+  text-align: left;
+}
+.icono_1 {
+  text-decoration: none;
+  color: rgb(250, 250, 250);
+  font-family: socialmedia;
+  max-width: 50px;
+  padding: 0.2rem;
+  font-size: 1.6rem;
+  text-align: center;
+  justify-content: space-between;
+}
+.img_carrusel d-block w-100{
+  border-radius: 10%;
+}
+.icono_2 {
+  text-decoration: none;
+  color: rgb(250, 250, 250);
+  font-family: socialmedia;
+  max-width: 50px;
+  padding: 0.2rem;
+  font-size: 1.6rem;
+  text-align: center;
+  justify-items:stretch;
+  display: flex;
+}
+.icono_3 {
+  text-decoration: none;
+  color: rgb(250, 250, 250);
+  font-family: socialmedia;
+  max-width: 50px;
+  padding: 0.2rem;
+  font-size: 1.6rem;
+  text-align: center;
+  justify-items:stretch;
+  display: flex;
+}
+.container_2 {
+  background: rgb(151, 237, 231);
+  background: linear-gradient(
+    90deg,
+    rgba(151, 237, 231, 1) 0%,
+    rgba(232, 152, 160, 1) 100%
+  );
+#fot{
+  background-color: $secondary-color;
+}
+}
