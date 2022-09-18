@@ -1,3 +1,12 @@
 {
-  "message": "Load file json for translates"
+  "server-messages": {
+    "404": {
+      "title": "404",
+      "message": "File Not Found"
+    },
+    "503": {
+      "title": "503",
+      "message": "Route Under Maintenance"
+    }
+  }
 }

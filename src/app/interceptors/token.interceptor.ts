@@ -6,17 +6,24 @@ import {
   HttpInterceptor,
   HttpHeaders,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, pipe, throwError } from 'rxjs';
 import { AuthService } from '@services/auth';
+import { CoreService } from '@services/core';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private coreService: CoreService
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    this.coreService.showLoad();
+
     let headers = request.headers ? request.headers : new HttpHeaders();
 
     if (this.authService.token) {
@@ -26,6 +33,15 @@ export class TokenInterceptor implements HttpInterceptor {
       );
     }
 
-    return next.handle(request.clone({ headers }));
+    return next.handle(request.clone({ headers })).pipe(
+      map((request) => {
+        this.coreService.hideLoad();
+        return request;
+      }),
+      catchError((error) => {
+        this.coreService.hideLoad();
+        return throwError(error);
+      })
+    );
   }
 }

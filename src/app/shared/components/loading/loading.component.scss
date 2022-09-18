@@ -1,7 +1,31 @@
+@import "./src/assets/styles/style";
+
 .container-loading {
-  & .text-loading {
-    padding: 1rem 0;
-    text-align: center;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  max-height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+  z-index: 50;
+
+  & .loading {
+    background: $color-fad-blue;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    max-width: 100vw;
     width: 100%;
+
+    & .loading-text {
+      text-align: center;
+      width: 100%;
+    }
   }
 }

@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { CoreService, MessageService } from '@services/core';
 import { Router } from '@angular/router';
 
@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private coreService: CoreService,
-    private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   intercept(
@@ -23,7 +23,12 @@ export class ErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     this.coreService.showLoad();
+
     return next.handle(request).pipe(
+      map((request) => {
+        this.coreService.hideLoad();
+        return request;
+      }),
       catchError((error) => {
         this.messageService.error(error);
         this.router.navigate(['common/not-found/']);
