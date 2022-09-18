@@ -5,9 +5,15 @@ import { CommonRoutingModule } from './common-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PageInformationComponent } from './page-information/page-information.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { UnderMaintenanceComponent } from './under-maintenance/under-maintenance.component';
 
 @NgModule({
-  declarations: [NotFoundComponent, PageInformationComponent],
-  imports: [NgCommonModule, CommonRoutingModule, SharedModule],
+  declarations: [
+    NotFoundComponent,
+    PageInformationComponent,
+    UnderMaintenanceComponent,
+  ],
+  imports: [NgCommonModule, CommonRoutingModule, SharedModule, TranslateModule],
 })
 export class CommonModule {}

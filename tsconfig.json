@@ -22,10 +22,11 @@
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@env/*": ["src/environments/*"],
+      "@interceptors": ["src/app/interceptors"],
       "@layout": ["src/app/layout"],
-      "@shared/*": ["src/app/shared/*"],
       "@models/*": ["src/app/models/*"],
-      "@services/*": ["src/app/services/*"]
+      "@services/*": ["src/app/services/*"],
+      "@shared/*": ["src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {

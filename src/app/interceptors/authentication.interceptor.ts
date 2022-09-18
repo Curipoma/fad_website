@@ -6,49 +6,35 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '@services/auth';
-import { RoutesService } from '@services/core';
+import { CoreService } from '@services/core';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private routesService: RoutesService
+    private coreService: CoreService,
+    private router: Router
   ) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    this.coreService.showLoad();
+
     return next.handle(request).pipe(
+      map((request) => {
+        this.coreService.hideLoad();
+        return request;
+      }),
       catchError((error) => {
         // Cuando la aplicación o una ruta está en mantenimiento
         if (error.status === 503) {
           this.authService.removeLogin();
           this.router.navigate(['/common/under-maintenance']);
-        }
-
-        // Cuando el usuario está suspendido
-        if (error.status === 429) {
-          this.authService.removeLogin();
-          this.router.navigate(['/auth/login']);
-        }
-        if (error.status === 401) {
-          this.authService.removeLogin();
-          this.routesService.login();
-        }
-        // Cuando el usuario no tiene permisos para acceder al recurso solicitado y se encuentra logueado
-        if (
-          (error.status === 401 ||
-            error.status === 403 ||
-            error.status === 423) &&
-          this.authService.token
-        ) {
-          // this.authService.removeLogin();
-          // this.router.navigate(['/auth/login']);
         }
 
         // Cuando el usuario no tiene permisos para acceder al recurso solicitado y no está logueado
@@ -62,6 +48,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
           this.router.navigate(['/auth/login']);
         }
 
+        this.coreService.hideLoad();
         return throwError(error);
       })
     );
