@@ -1,4 +1,5 @@
 export interface PaginatorModel {
   page: number;
-  perPage: number;
+  limit: number;
+  totalItems: number;
 }

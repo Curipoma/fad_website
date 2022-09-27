@@ -18,6 +18,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MenubarModule } from 'primeng/menubar';
+import {MegaMenuModule} from "primeng/megamenu";
+import {ButtonModule} from "primeng/button";
+import {CheckboxModule} from "primeng/checkbox";
+import {PasswordModule} from "primeng/password";
+import {InputTextModule} from "primeng/inputtext";
+import {RippleModule} from "primeng/ripple";
+import {MessagesModule} from "primeng/messages";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -47,6 +57,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HttpClientModule,
     LazyLoadImageModule,
     SharedModule,
+    MenubarModule,
+    MegaMenuModule,
+    ButtonModule,
+    CheckboxModule,
+    PasswordModule,
+    InputTextModule,
+    RippleModule,
+    MessagesModule,
+    ToastModule,
   ],
   exports: [TranslateModule],
   providers: [
@@ -55,6 +74,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       useClass: HashLocationStrategy,
     },
     HttpInterceptorProviders,
+    MessageService
   ],
   bootstrap: [AppComponent],
 })

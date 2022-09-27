@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {CoreRoutes, EnvRoutes} from "@shared/enums";
 
 @Component({
   selector: 'app-not-found',
@@ -8,6 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NotFoundComponent implements OnInit {
   statusTitle: string | undefined = '';
+  coreRoutes = CoreRoutes;
+  envRoutes = EnvRoutes;
+
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {

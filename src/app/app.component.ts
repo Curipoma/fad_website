@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@services/auth';
+import { Component } from '@angular/core';
 import { CoreService } from '@services/core';
 
 @Component({
@@ -7,19 +6,8 @@ import { CoreService } from '@services/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   loaded$ = this.coreService.loaded$;
 
-  constructor(
-    private authService: AuthService,
-    private coreService: CoreService
-  ) {}
-
-  ngOnInit(): void {
-    this.authUser();
-  }
-
-  async authUser() {
-    await this.authService.redirectUser();
-  }
+  constructor(private coreService: CoreService) {}
 }

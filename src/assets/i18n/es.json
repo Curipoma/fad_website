@@ -1,4 +1,15 @@
 {
+  "app": {
+    "long-title": "FAD (Fundación de ayuda al discapacitado)",
+    "short-title": "FAD",
+    "created_at": "September, 2022"
+  },
+  "actions": {
+    "search": "Search"
+  },
+  "routes": {
+    "home": "Home"
+  },
   "server-messages": {
     "404": {
       "title": "404",
@@ -8,5 +19,8 @@
       "title": "503",
       "message": "Route Under Maintenance"
     }
+  },
+  "AssetDetailsList": {
+    "title": "Asset Details"
   }
 }
