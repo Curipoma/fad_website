@@ -1,9 +1,19 @@
-<div class="container-not-found">
-  <img class="logo" src="assets/images/logo.png" alt="logo" />
-
-  <div class="not-found">
-    <h1 class="display-1">{{ "server-messages.404.title" | translate }}</h1>
-
-    <h2 class="not-found-text">{{ "server-messages.404.message" | translate }}</h2>
+<div
+  class="d-flex gap-3 flex-column justify-content-center align-items-center max-w-screen w-100 min-vh-100"
+>
+  <img class="w-25rem" src="assets/images/logo.png" alt="logo" />
+  <div
+    class="d-flex gap-4 flex-row justify-content-center align-items-center mt-7"
+  >
+    <h1 class="">{{ "server-messages.404.title" | translate }}</h1>
+    <span class="">{{ "server-messages.404.message" | translate }}</span>
   </div>
+  <a [routerLink]="envRoutes.COMMON + coreRoutes.HOME">
+    <button
+      pButton
+      type="button"
+      label="Back"
+      class="p-button-outlined p-button-info"
+    ></button>
+  </a>
 </div>

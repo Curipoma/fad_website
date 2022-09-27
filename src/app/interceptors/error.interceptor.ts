@@ -7,14 +7,14 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CoreService, MessageService } from '@services/core';
+import { CoreService, MessageCustomizationService } from '@services/core';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private coreService: CoreService,
-    private messageService: MessageService,
+    private messageCustomizationService: MessageCustomizationService,
     private router: Router
   ) {}
 
@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return request;
       }),
       catchError((error) => {
-        this.messageService.error(error);
+        this.messageCustomizationService.error(error);
         this.router.navigate(['common/not-found/']);
         this.coreService.hideLoad();
         return throwError(error);

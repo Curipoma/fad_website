@@ -1,27 +1,40 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-import { MessageService, CoreService } from '@services/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { MessageCustomizationService, CoreService } from '@services/core';
 import { ServerResponse } from '@models/http';
+import { PaginatorModel } from '@models/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export abstract class AbstractHttpService {
+  private pagination = new BehaviorSubject<PaginatorModel>(
+    this.coreService.paginator
+  );
+  public pagination$ = this.pagination.asObservable();
+
   protected constructor(
     @Inject('coreService') private coreService: CoreService,
     @Inject('httpClient') protected httpClient: HttpClient,
-    @Inject('messageService') private messageService: MessageService,
+    @Inject('messageService')
+    private messageService: MessageCustomizationService,
     @Inject('resourceUrl') private resourceUrl: string
   ) {}
 
-  index<T>(): Observable<T> {
+  index<T>(page: number = 0, search: string = ''): Observable<T> {
     const headers = new HttpHeaders().append('pagination', 'true');
+    const params = new HttpParams()
+      .append('page', page)
+      .append('search', search);
     this.coreService.showLoad();
     return this.httpClient
-      .get<ServerResponse<T>>(this.resourceUrl, { headers })
+      .get<ServerResponse<T>>(this.resourceUrl, { headers, params })
       .pipe(
         map((res) => {
+          if (res.pagination) {
+            this.pagination.next(res.pagination);
+          }
           this.coreService.hideLoad();
           return res.data;
         })

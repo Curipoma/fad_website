@@ -2,7 +2,7 @@ import { PaginatorModel } from '@models/core';
 
 export interface ServerResponse<T> {
   data: T;
-  pagination?: PaginatorModel;
+  pagination: PaginatorModel;
   error?: string;
   message: string;
   statusCode: number;

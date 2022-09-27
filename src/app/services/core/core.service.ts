@@ -8,14 +8,8 @@ import { PaginatorModel } from '@models/core';
 export class CoreService {
   private loaded = new BehaviorSubject<boolean>(false);
   public loaded$ = this.loaded.asObservable();
-  private paginatorModel = new BehaviorSubject<PaginatorModel>(this.paginator);
-  public paginator$ = this.paginatorModel.asObservable();
 
   constructor() {}
-
-  paginate(paginator: PaginatorModel): void {
-    this.paginatorModel.next(paginator);
-  }
 
   showLoad(): void {
     this.loaded.next(true);
@@ -27,8 +21,9 @@ export class CoreService {
 
   get paginator(): PaginatorModel {
     return {
-      page: 1,
-      perPage: 10,
+      page: 0,
+      limit: 5,
+      totalItems: 0,
     };
   }
 }

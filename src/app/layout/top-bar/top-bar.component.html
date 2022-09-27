@@ -1,1 +1,13 @@
-<p>tool bar work</p>
+<div class="nav-container d-flex flex-column sm:flex-row">
+  <div class="col-12 sm:col-2">
+    <a [routerLink]="envRoutes.COMMON + coreRoutes.HOME">
+      <img
+        class="max-w-10rem w-100"
+        [lazyLoad]="'assets/images/logo.png'"
+        [defaultImage]="'assets/images/main/loading.gif'"
+        [alt]="'logo'"
+      />
+    </a>
+  </div>
+  <p-megaMenu class="col-12 sm:col-10" [model]="menubarItems"></p-megaMenu>
+</div>

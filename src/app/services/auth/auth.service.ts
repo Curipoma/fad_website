@@ -42,7 +42,7 @@ export class AuthService {
   redirectUser() {
     this.login$.subscribe(async (isLoggedIn) => {
       if (!isLoggedIn) {
-        await this.router.navigate(['/common/dashboard']);
+        await this.router.navigate(['/common/page']);
       }
     });
   }
