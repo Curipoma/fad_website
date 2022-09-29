@@ -10,7 +10,10 @@ import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextModule } from 'primeng/inputtext';
-import {ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
+import { RippleModule } from 'primeng/ripple';
+import { CardModule } from 'primeng/card';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     TranslateModule,
     InputTextModule,
     ReactiveFormsModule,
+    RippleModule,
+    CardModule,
+    SharedModule,
   ],
 })
 export class AssetDetailsModule {}

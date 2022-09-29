@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MessagesService } from '@services/shared';
-import { CoreRoutes, EnvRoutes } from '@shared/enums';
+import { MessageKeysEnum } from '@shared/enums';
 
 @Component({
   selector: 'app-messages',
@@ -8,17 +8,14 @@ import { CoreRoutes, EnvRoutes } from '@shared/enums';
   styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent {
-  coreRoutes = CoreRoutes;
-  envRoutes = EnvRoutes;
-  confirm: Function = this.messagesService.onConfirm;
-  reject: Function = this.messagesService.onReject;
-
   constructor(private messagesService: MessagesService) {}
 
   onConfirm() {
-    this.confirm();
+    this.messagesService.confirm();
+    this.messagesService.clearAll(MessageKeysEnum.QUESTION_ACTION);
   }
   onReject() {
-    this.reject();
+    this.messagesService.reject();
+    this.messagesService.clearAll(MessageKeysEnum.QUESTION_ACTION);
   }
 }

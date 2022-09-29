@@ -19,15 +19,21 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MenubarModule } from 'primeng/menubar';
-import {MegaMenuModule} from "primeng/megamenu";
-import {ButtonModule} from "primeng/button";
-import {CheckboxModule} from "primeng/checkbox";
-import {PasswordModule} from "primeng/password";
-import {InputTextModule} from "primeng/inputtext";
-import {RippleModule} from "primeng/ripple";
-import {MessagesModule} from "primeng/messages";
-import {MessageService} from "primeng/api";
-import {ToastModule} from "primeng/toast";
+import { MegaMenuModule } from 'primeng/megamenu';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { RippleModule } from 'primeng/ripple';
+import { MessagesModule } from 'primeng/messages';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { ConfigComponent } from './layout/config/config.component';
+import { MenuComponent } from './layout/menu/menu.component';
+import { MenuitemComponent } from './layout/menuitem/menuitem.component';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -40,6 +46,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     TopBarComponent,
     BlankComponent,
     MainComponent,
+    SidebarComponent,
+    ConfigComponent,
+    MenuComponent,
+    MenuitemComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +76,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RippleModule,
     MessagesModule,
     ToastModule,
+    ReactiveFormsModule,
+    ProgressBarModule,
   ],
   exports: [TranslateModule],
   providers: [
@@ -74,7 +86,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       useClass: HashLocationStrategy,
     },
     HttpInterceptorProviders,
-    MessageService
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })

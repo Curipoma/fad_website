@@ -5,7 +5,9 @@
     "created_at": "September, 2022"
   },
   "actions": {
-    "search": "Search"
+    "search": "Search",
+    "delete": "Eliminar",
+    "details": "Detalles"
   },
   "routes": {
     "home": "Home"
@@ -21,6 +23,8 @@
     }
   },
   "AssetDetailsList": {
-    "title": "Asset Details"
+    "title": "Asset Details",
+    "summary": "Detalles de cada activo",
+    "detail": "Puedes crear uno de estos registros para asociar a un activo"
   }
 }

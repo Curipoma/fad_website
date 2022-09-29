@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { MessageType } from '@shared/enums';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessagesService {
-  onConfirm: Function = () => {
-    console.log('other funtion')};
-  onReject: Function = () => {};
+  public confirm: Function = () => {};
+  public reject: Function = () => {};
 
-  constructor(private messageService: MessageService, private router: Router) {}
+  constructor(private messageService: MessageService) {}
 
-  showSuccess(summary: string, detail: string) {
+  showSuccess(summary: string, detail: string): void {
     this.messageService.add({
       severity: MessageType.SUCCESS,
       summary: summary,
@@ -22,20 +20,31 @@ export class MessagesService {
   }
 
   questionAction(
-    summary: string,
-    detail: string,
-    key: string,
+    summary: string = '',
+    detail: string = '',
+    key: string = '',
     onConfirm: Function,
     onReject: Function
-  ) {
-    console.log(onConfirm)
+  ): void {
+    this.confirm = onConfirm;
+    this.reject = onReject;
+    this.messageService.add({
+      key: key,
+      severity: MessageType.WARN,
+      summary: summary,
+      detail: detail,
+    });
+  }
 
-
-    this.onConfirm = onConfirm;
-    this.onReject = onReject;
-
-    console.log(this.onConfirm())
-
+  questionOnExit(
+    summary: string = '',
+    detail: string = '',
+    key: string = '',
+    onConfirm: Function,
+    onReject: Function
+  ): void {
+    this.confirm = onConfirm;
+    this.reject = onReject;
     this.messageService.add({
       key: key,
       severity: MessageType.WARN,

@@ -4,6 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { MessageCustomizationService, CoreService } from '@services/core';
 import { ServerResponse } from '@models/http';
 import { PaginatorModel } from '@models/core';
+import { MessagesService } from '@services/shared';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +16,11 @@ export abstract class AbstractHttpService {
   public pagination$ = this.pagination.asObservable();
 
   protected constructor(
-    @Inject('coreService') private coreService: CoreService,
-    @Inject('httpClient') protected httpClient: HttpClient,
-    @Inject('messageService')
+    private coreService: CoreService,
+    protected httpClient: HttpClient,
     private messageService: MessageCustomizationService,
-    @Inject('resourceUrl') private resourceUrl: string
+    @Inject('resourceUrl') private resourceUrl: string,
+    private messagesService: MessagesService
   ) {}
 
   index<T>(page: number = 0, search: string = ''): Observable<T> {
@@ -82,13 +83,36 @@ export abstract class AbstractHttpService {
 
   delete<T>(id: number): Observable<T> {
     this.coreService.showLoad();
+    console.log('deleted ' + id);
     return this.httpClient
       .delete<ServerResponse<T>>(this.resourceUrl.concat(`/${id.toString()}`))
       .pipe(
         map((res) => {
-          this.messageService.success(res);
+          this.messagesService.showSuccess(
+            'Eliminado',
+            'Registro ' + id + ', eliminado correctamente'
+          );
           this.coreService.hideLoad();
           return res.data;
+        })
+      );
+  }
+
+  removeAll<T>(informationTeachers: T): Observable<T> {
+    this.coreService.showLoad();
+    return this.httpClient
+      .patch<ServerResponse<T>>(
+        this.resourceUrl.concat('/remove-all'),
+        informationTeachers
+      )
+      .pipe(
+        map((response) => {
+          this.coreService.hideLoad();
+          this.messagesService.showSuccess(
+            'Eliminado',
+            'Registros eliminados correctamente'
+          );
+          return response.data;
         })
       );
   }

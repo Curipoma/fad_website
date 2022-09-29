@@ -3,16 +3,28 @@
   styleClass="p-datatable-striped"
   [value]="assetDetails"
   [columns]="columns"
-  [loading]="loading"
+  [loading]="(loaded$ | async)!"
   [(selection)]="selectedAssetDetails"
   [responsive]="true"
 >
   <ng-template pTemplate="caption">
     <div class="flex align-items-center justify-content-between">
-      {{ "AssetDetailsList.title" | translate }}
+      <h1>{{ "AssetDetailsList.title" | translate }}</h1>
       <div class="d-flex">
         <div class="col-fixed">
-          <span class="p-float-label">
+          <button
+            pButton
+            *ngIf="selectedAssetDetails.length > 0"
+            type="button"
+            label="Eliminar Detalles de Activos"
+            class="p-button-danger"
+            icon="pi pi-trash"
+            (click)="removeAll()"
+          ></button>
+        </div>
+        <div class="col-fixed">
+          <span class="p-float-label p-input-icon-right">
+            <i class="pi pi-search"></i>
             <input
               pInputText
               id="float-input"
@@ -22,9 +34,18 @@
             <label for="float-input"> {{ "actions.search" | translate }}</label>
           </span>
         </div>
-
         <div class="col-fixed">
-          <p-button icon="pi pi-refresh" (click)="refresh()"></p-button>
+          <button
+            pButton
+            type="button"
+            label="Crear Detalle de Activo"
+            class="p-button-success"
+            icon="pi pi-plus"
+            (click)="redirectCreateForm()"
+          ></button>
+        </div>
+        <div class="col-fixed">
+          <p-button icon="pi pi-refresh" (click)="getAssetDetails()"></p-button>
         </div>
       </div>
     </div>
@@ -38,7 +59,7 @@
         {{ col.header }}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
-      <th class="text-center">
+      <th>
         <button
           pButton
           pRipple
@@ -62,31 +83,30 @@
       </td>
       <td *ngFor="let col of columns">
         <!--Objects-->
-        <div *ngIf="rowData[col.field]?.id" [ngSwitch]="col.field">
-          <div *ngSwitchCase="'asset'">
-            {{ rowData[col.field].code }}
-          </div>
+        <div class="d-flex lg:hidden strong">
+          <span>{{ col.header }}</span>
         </div>
         <div *ngIf="rowData[col.field]?.id" [ngSwitch]="col.field">
-          <div *ngSwitchCase="'address'">
-            {{ rowData[col.field].name }}
-          </div>
+          <span *ngSwitchCase="'asset'">
+            {{ rowData[col.field].code }}
+          </span>
         </div>
         <!--Fields-->
         <div *ngIf="!rowData[col.field]?.id" [ngSwitch]="col.field">
-          <div *ngSwitchCase="'updatedAt'">
+          <span *ngSwitchCase="'updatedAt'">
             {{ rowData[col.field] | date }}
-          </div>
-          <div *ngSwitchDefault>{{ rowData[col.field] }}</div>
+          </span>
+          <span *ngSwitchDefault>{{ rowData[col.field] }}</span>
         </div>
       </td>
       <td>
+        <span class="d-flex lg:hidden strong">Opciones</span>
         <div class="d-flex flex-row">
           <div class="col-fixed">
             <button
               pButton
               type="button"
-              label="Deleted"
+              [label]="'actions.delete' | translate"
               icon="pi pi-trash"
               (click)="remove(rowData.id)"
               class="p-button-danger"
@@ -96,9 +116,10 @@
             <button
               pButton
               type="button"
-              label="Details"
+              [label]="'actions.details' | translate"
               icon="pi pi-pencil"
               class="p-button-info"
+              (click)="redirectEditForm(rowData.id)"
             ></button>
           </div>
         </div>
@@ -107,14 +128,15 @@
   </ng-template>
   <ng-template pTemplate="summary">
     {{
-    messageCustomizationService.paginatorTotalRegisters(
+      messageCustomizationService.paginatorTotalRegisters(
         this.coreService.paginator
-      )}}
+      )
+    }}
   </ng-template>
   <ng-template pTemplate="emptymessage" let-columns>
     <tr>
       <td [attr.colspan]="columns.length">
-        {{ messageCustomizationService.paginatorNoRecordsFound }}
+        {{ messageCustomizationService.paginatorTotalRegisters(paginator) }}
       </td>
     </tr>
   </ng-template>
