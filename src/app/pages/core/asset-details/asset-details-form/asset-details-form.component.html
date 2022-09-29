@@ -1,1 +1,81 @@
-<p>asset-details-form works!</p>
+<p-card *ngIf="!(loaded$ | async)" class="p-fluid">
+  <ng-template pTemplate="header">
+    <h3 *ngIf="!id">Crear Detalle de Activo</h3>
+    <h3 *ngIf="id">Actualizar Detalle de Activo {{ id }}</h3>
+  </ng-template>
+  <form class="p-fluid grid col-12" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="p-fluid grid">
+      <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
+        <span class="p-float-label">
+          <p-dropdown
+            id="asset"
+            [options]="assets"
+            formControlName="asset"
+            optionLabel="code"
+            optionDisabled="code"
+          ></p-dropdown>
+          <label for="asset">Activo</label>
+        </span>
+      </div>
+      <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
+        <span class="p-float-label">
+          <input
+            id="annualExistence"
+            type="text"
+            pInputText
+            formControlName="annualExistence"
+          />
+          <label for="annualExistence">Existencia Anual</label>
+        </span>
+      </div>
+      <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
+        <span class="p-float-label">
+          <input id="code" type="text" pInputText formControlName="code" />
+          <label for="code">Código</label>
+        </span>
+      </div>
+      <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
+        <span class="p-float-label">
+          <input
+            id="initialExistence"
+            type="text"
+            pInputText
+            formControlName="initialExistence"
+          />
+          <label for="initialExistence">Existencia Inicial</label>
+        </span>
+      </div>
+      <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
+        <span class="p-float-label">
+          <input
+            id="unitValue"
+            type="text"
+            pInputText
+            formControlName="unitValue"
+          />
+          <label for="unitValue">Valor Initario</label>
+        </span>
+      </div>
+      <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
+        <span class="p-float-label">
+          <input id="value" type="text" pInputText formControlName="value" />
+          <label for="value">Valor Total</label>
+        </span>
+      </div>
+      <div class="p-fluid d-flex justify-content-center col-12">
+        <div class="p-fluid col-fixed">
+          <button
+            pButton
+            type="submit"
+            icon="pi pi-save"
+            class="p-button p-button-success"
+            label="Crear Detalle de Activo"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="(loaded$ | async)!" class="field col-12">
+      <app-progress-bar [message]="'mesage de prueba'"></app-progress-bar>
+    </div>
+  </form>
+</p-card>

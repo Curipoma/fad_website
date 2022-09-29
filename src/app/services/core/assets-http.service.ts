@@ -11,8 +11,8 @@ import { MessagesService } from '@services/shared';
 @Injectable({
   providedIn: 'root',
 })
-export class AssetDetailsHttpService extends AbstractHttpService {
-  static url = environment.API_URL.concat('asset-details');
+export class AssetsHttpService extends AbstractHttpService {
+  static url = environment.API_URL.concat('assets');
 
   constructor(
     coreService: CoreService,
@@ -24,7 +24,7 @@ export class AssetDetailsHttpService extends AbstractHttpService {
       coreService,
       httpClient,
       messageService,
-      AssetDetailsHttpService.url,
+      AssetsHttpService.url,
       messagesService
     );
   }

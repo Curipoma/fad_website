@@ -1,7 +1,14 @@
-<div class="main-component">
-  <div class="router">
-    <app-top-bar></app-top-bar>
-    <router-outlet></router-outlet>
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <app-top-bar></app-top-bar>
+  <div class="layout-sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="layout-main-container">
+    <div class="layout-main">
+      <router-outlet></router-outlet>
+    </div>
     <app-footer></app-footer>
   </div>
+  <app-config></app-config>
+  <div class="layout-mask"></div>
 </div>
