@@ -1,8 +1,8 @@
-<p-card *ngIf="!(loaded$ | async)" class="p-fluid">
-  <ng-template pTemplate="header">
+<div *ngIf="!(loaded$ | async)" class="grid card p-fluid col-12">
+  <div class="grid p-fluid col-12">
     <h3 *ngIf="!id">Crear Detalle de Activo</h3>
     <h3 *ngIf="id">Actualizar Detalle de Activo {{ id }}</h3>
-  </ng-template>
+  </div>
   <form class="p-fluid grid col-12" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="p-fluid grid">
       <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
@@ -16,6 +16,12 @@
           ></p-dropdown>
           <label for="asset">Activo</label>
         </span>
+        <small
+          appErrorMessage
+          [errors]="asset.errors"
+          [touched]="asset.touched"
+          [dirty]="asset.dirty"
+        ></small>
       </div>
       <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
         <span class="p-float-label">
@@ -27,12 +33,24 @@
           />
           <label for="annualExistence">Existencia Anual</label>
         </span>
+        <small
+          appErrorMessage
+          [errors]="annualExistence.errors"
+          [touched]="annualExistence.touched"
+          [dirty]="annualExistence.dirty"
+        ></small>
       </div>
       <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
         <span class="p-float-label">
           <input id="code" type="text" pInputText formControlName="code" />
           <label for="code">Código</label>
         </span>
+        <small
+          appErrorMessage
+          [errors]="code.errors"
+          [touched]="code.touched"
+          [dirty]="code.dirty"
+        ></small>
       </div>
       <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
         <span class="p-float-label">
@@ -44,23 +62,48 @@
           />
           <label for="initialExistence">Existencia Inicial</label>
         </span>
+        <small
+          appErrorMessage
+          [errors]="initialExistence.errors"
+          [touched]="initialExistence.touched"
+          [dirty]="initialExistence.dirty"
+        ></small>
       </div>
       <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
         <span class="p-float-label">
-          <input
+          <p-inputNumber
             id="unitValue"
-            type="text"
-            pInputText
             formControlName="unitValue"
-          />
+            mode="currency"
+            currency="USD"
+            locale="en-US"
+          ></p-inputNumber>
           <label for="unitValue">Valor Initario</label>
         </span>
+        <small
+          appErrorMessage
+          [errors]="unitValue.errors"
+          [touched]="unitValue.touched"
+          [dirty]="unitValue.dirty"
+        ></small>
       </div>
       <div class="field col-12 sm:col-6 md:col-4 md:col-3 xl:col-2">
         <span class="p-float-label">
-          <input id="value" type="text" pInputText formControlName="value" />
+          <p-inputNumber
+            id="value"
+            formControlName="value"
+            mode="currency"
+            currency="USD"
+            locale="en-US"
+          ></p-inputNumber>
           <label for="value">Valor Total</label>
         </span>
+        <small
+          appErrorMessage
+          [errors]="value.errors"
+          [touched]="value.touched"
+          [dirty]="value.dirty"
+        ></small>
       </div>
       <div class="p-fluid d-flex justify-content-center col-12">
         <div class="p-fluid col-fixed">
@@ -72,10 +115,20 @@
             label="Crear Detalle de Activo"
           ></button>
         </div>
+        <div class="p-fluid col-fixed">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-chevron-left"
+            class="p-button p-button-warning"
+            label="Cancelar"
+            (click)="back()"
+          ></button>
+        </div>
       </div>
     </div>
     <div *ngIf="(loaded$ | async)!" class="field col-12">
       <app-progress-bar [message]="'mesage de prueba'"></app-progress-bar>
     </div>
   </form>
-</p-card>
+</div>

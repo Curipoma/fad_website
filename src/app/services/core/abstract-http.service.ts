@@ -48,6 +48,10 @@ export abstract class AbstractHttpService {
       map((res) => {
         this.messageService.success(res);
         this.coreService.hideLoad();
+        this.messagesService.showSuccess(
+          'Creado',
+          'Registro creado correctamente'
+        );
         return res.data;
       })
     );
@@ -76,6 +80,10 @@ export abstract class AbstractHttpService {
         map((res) => {
           this.messageService.success(res);
           this.coreService.hideLoad();
+          this.messagesService.showSuccess(
+            'Actualizado',
+            'Registro ' + id + ' actualizado correctamente'
+          );
           return res.data;
         })
       );
