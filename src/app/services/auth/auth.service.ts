@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { UserModel } from '@models/auth';
+import { PermissionModel, RoleModel, UserModel } from '@models/auth';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -37,6 +37,22 @@ export class AuthService {
 
   set auth(user: UserModel | undefined | null) {
     localStorage.setItem('auth', JSON.stringify(user));
+  }
+
+  get permissions(): PermissionModel[] {
+    return JSON.parse(String(localStorage.getItem('permissions')));
+  }
+
+  set permissions(permissions: PermissionModel[] | undefined | null) {
+    localStorage.setItem('permissions', JSON.stringify(permissions));
+  }
+
+  get roles(): RoleModel[] {
+    return JSON.parse(String(localStorage.getItem('role')));
+  }
+
+  set roles(role: RoleModel[] | undefined | null) {
+    localStorage.setItem('role', JSON.stringify(role));
   }
 
   redirectUser() {

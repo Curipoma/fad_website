@@ -8,6 +8,7 @@ import {
 } from '@services/core';
 import { MessagesService } from '@services/shared';
 import { AssetDetailsModel, AssetModel } from '@models/core';
+import { CoreRoutes, EnvRoutes } from '@shared/enums';
 
 @Component({
   selector: 'app-asset-details-form',
@@ -16,6 +17,8 @@ import { AssetDetailsModel, AssetModel } from '@models/core';
 })
 export class AssetDetailsFormComponent implements OnInit {
   id: number = 0;
+  coreRoutes = CoreRoutes;
+  envRoutes = EnvRoutes;
   form: FormGroup = this.newForm;
   loaded$ = this.coreService.loaded$;
   assets: AssetModel[] = [];
@@ -31,7 +34,6 @@ export class AssetDetailsFormComponent implements OnInit {
   ) {
     if (activatedRoute.snapshot.params['id'] !== 'new') {
       this.id = activatedRoute.snapshot.params['id'];
-      console.log(this.id);
     }
   }
 
@@ -52,21 +54,66 @@ export class AssetDetailsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAssets();
+    if (this.id > 0) {
+      this.getAssetDetail();
+    } else {
+    }
   }
 
   get newForm(): FormGroup {
     return this.formBuilder.group({
-      asset: [null, [Validators.required]],
-      annualExistence: [null, [Validators.required]],
-      code: [null, [Validators.required]],
-      initialExistence: [null, [Validators.required]],
-      unitValue: [null, [Validators.required]],
-      value: [null, [Validators.required]],
+      asset: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ],
+      ],
+      annualExistence: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ],
+      ],
+      code: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ],
+      ],
+      initialExistence: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ],
+      ],
+      unitValue: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ],
+      ],
+      value: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ],
+      ],
     });
   }
 
   onSubmit(): void {
-    console.log(this.form.errors);
     if (this.form.valid) {
       if (this.id > 0) {
         this.update(this.form.value);
@@ -74,11 +121,14 @@ export class AssetDetailsFormComponent implements OnInit {
         this.create(this.form.value);
       }
     } else {
+      this.messagesService.showError('Error', 'Llene todos los campos');
       this.form.markAllAsTouched();
     }
   }
   back(): void {
-    this.router.navigate(['/core/information-teachers']);
+    this.router.navigate([
+      this.envRoutes.CORE + this.coreRoutes.ASSET_DETAILS_LIST,
+    ]);
   }
 
   create(assetDetail: AssetDetailsModel): void {
@@ -99,10 +149,34 @@ export class AssetDetailsFormComponent implements OnInit {
       });
   }
 
+  getAssetDetail() {
+    this.assetDetailsHttpService.show(this.id).subscribe((assetDetail) => {
+      this.form.reset(assetDetail);
+    });
+  }
+
   getAssets() {
     this.assetsHttpService.index<AssetModel[]>().subscribe((assets) => {
       this.assets = assets;
-      console.log(assets)
     });
+  }
+
+  get asset() {
+    return this.form.controls['asset'];
+  }
+  get annualExistence() {
+    return this.form.controls['annualExistence'];
+  }
+  get code() {
+    return this.form.controls['code'];
+  }
+  get initialExistence() {
+    return this.form.controls['initialExistence'];
+  }
+  get unitValue() {
+    return this.form.controls['unitValue'];
+  }
+  get value() {
+    return this.form.controls['value'];
   }
 }
