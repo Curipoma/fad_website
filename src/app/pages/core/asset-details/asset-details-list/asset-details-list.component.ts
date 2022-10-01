@@ -7,7 +7,7 @@ import {
 import { AssetDetailsModel, ColumnModel, PaginatorModel } from '@models/core';
 import { FormControl } from '@angular/forms';
 import { MessagesService } from '@services/shared';
-import { CoreRoutes, EnvRoutes } from '@shared/enums';
+import { CoreRoutes, EnvRoutes, OtherRoutes } from '@shared/enums';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,6 +25,7 @@ export class AssetDetailsListComponent implements OnInit {
   search: FormControl = new FormControl('');
   selectedAssetDetails: AssetDetailsModel[] = [];
   assetDetails: AssetDetailsModel[] = [];
+  loaded: boolean = false;
 
   constructor(
     private assetDetailsHttpService: AssetDetailsHttpService,
@@ -43,9 +44,11 @@ export class AssetDetailsListComponent implements OnInit {
   }
 
   getAssetDetails(page: number = 0) {
+    this.loaded = true;
     this.assetDetailsHttpService
       .index<AssetDetailsModel[]>(page, this.search.value)
       .subscribe((assetDetails) => {
+        this.loaded = false;
         this.assetDetails = assetDetails;
       });
   }
@@ -59,6 +62,9 @@ export class AssetDetailsListComponent implements OnInit {
       { field: 'initialExistence', header: 'Initial Existence' },
       { field: 'unitValue', header: 'Unit Value' },
       { field: 'value', header: 'Value' },
+      { field: 'createdAt', header: 'Fecha Creación' },
+      { field: 'updatedAt', header: 'Fecha Actualización' },
+      { field: 'deletedAt', header: 'Fecha Eliminación' },
     ];
   }
 
@@ -67,12 +73,15 @@ export class AssetDetailsListComponent implements OnInit {
   }
 
   async redirectCreateForm() {
-    await this.router.navigate(['/core/asset-details', 'new']);
+    await this.router.navigate([
+      this.envRoutes.CORE + '/' + this.coreRoutes.ASSET_DETAILS_FORM,
+      OtherRoutes.NEW,
+    ]);
   }
 
   async redirectEditForm(id: number) {
     await this.router.navigate([
-      this.envRoutes.CORE + this.coreRoutes.ASSET_DETAILS_FORM,
+      this.envRoutes.CORE + '/' + this.coreRoutes.ASSET_DETAILS_FORM,
       id,
     ]);
   }
@@ -85,9 +94,7 @@ export class AssetDetailsListComponent implements OnInit {
           this.getAssetDetails();
         });
     };
-    const onReject = () => {
-      console.log('onReject from component');
-    };
+    const onReject = () => {};
     this.messagesService.questionAction(
       'Eliminar',
       'Seguro quieres eliminar detalle de activo ' + id,
@@ -108,9 +115,7 @@ export class AssetDetailsListComponent implements OnInit {
           this.getAssetDetails();
         });
     };
-    const onReject = () => {
-      console.log('onReject from component');
-    };
+    const onReject = () => {};
     this.messagesService.questionAction(
       'Eliminar',
       'Seguro quieres eliminar detalles de activo',

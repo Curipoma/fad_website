@@ -1,0 +1,28 @@
+
+// scrollbar
+
+::-webkit-scrollbar-track {
+  border-radius: 2rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--surface-400);
+  border-radius: 2rem;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+::-webkit-scrollbar-button:increment,
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}

@@ -1,6 +1,7 @@
 {
   "app": {
     "long-title": "FAD (Fundación de ayuda al discapacitado)",
+    "description": "Fundación de ayuda al discapacitado",
     "short-title": "FAD",
     "created_at": "September, 2022"
   },
@@ -23,8 +24,18 @@
     }
   },
   "AssetDetailsList": {
-    "title": "Asset Details",
+    "title": "Detalles de Activos",
     "summary": "Detalles de cada activo",
     "detail": "Puedes crear uno de estos registros para asociar a un activo"
+  },
+  "AssetsList": {
+    "title": "Activos",
+    "summary": "Activos",
+    "detail": "Puedes crear un activo"
+  },
+  "ConsumablesList": {
+    "title": "Consumibles",
+    "summary": "Consumibles",
+    "detail": "Puedes crear un consumibles"
   }
 }

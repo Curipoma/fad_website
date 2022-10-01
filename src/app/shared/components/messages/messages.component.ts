@@ -8,7 +8,7 @@ import { MessageKeysEnum } from '@shared/enums';
   styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent {
-  constructor(private messagesService: MessagesService) {}
+  constructor(public messagesService: MessagesService) {}
 
   onConfirm() {
     this.messagesService.confirm();

@@ -1,8 +1,8 @@
-<div class="card py-1 max-w-screen w-100">
-<!--  todo hacer la anmimacion de carga-->
+<div class="max-w-screen w-100">
+  <!--  todo - hacer la anmimacion de carga-->
   <app-loading></app-loading>
   <app-messages></app-messages>
 
-  <!--  todo animar la ruta cuando aparece despues de evento (load, navigate)-->
+  <!--  todo - animar la ruta cuando aparece despues de evento (load, navigate)-->
   <router-outlet *ngIf="!(loaded$ | async)"></router-outlet>
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { MessageType } from '@shared/enums';
+import { MessageTypeEnum } from '@shared/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class MessagesService {
 
   showSuccess(summary: string, detail: string): void {
     this.messageService.add({
-      severity: MessageType.SUCCESS,
+      severity: MessageTypeEnum.SUCCESS,
       summary: summary,
       detail: detail,
     });
@@ -30,24 +30,7 @@ export class MessagesService {
     this.reject = onReject;
     this.messageService.add({
       key: key,
-      severity: MessageType.WARN,
-      summary: summary,
-      detail: detail,
-    });
-  }
-
-  questionOnExit(
-    summary: string = '',
-    detail: string = '',
-    key: string = '',
-    onConfirm: Function,
-    onReject: Function
-  ): void {
-    this.confirm = onConfirm;
-    this.reject = onReject;
-    this.messageService.add({
-      key: key,
-      severity: MessageType.WARN,
+      severity: MessageTypeEnum.WARN,
       summary: summary,
       detail: detail,
     });
@@ -55,7 +38,7 @@ export class MessagesService {
 
   showInfo(summary: string, detail: string) {
     this.messageService.add({
-      severity: MessageType.INFO,
+      severity: MessageTypeEnum.INFO,
       summary: summary,
       detail: detail,
     });
@@ -63,7 +46,7 @@ export class MessagesService {
 
   showWarn(summary: string, detail: string) {
     this.messageService.add({
-      severity: MessageType.WARN,
+      severity: MessageTypeEnum.WARN,
       summary: summary,
       detail: detail,
     });
@@ -71,7 +54,7 @@ export class MessagesService {
 
   showError(summary: string, detail: string) {
     this.messageService.add({
-      severity: MessageType.ERROR,
+      severity: MessageTypeEnum.ERROR,
       summary: summary,
       detail: detail,
     });
@@ -79,7 +62,7 @@ export class MessagesService {
 
   showCustom(summary: string, detail: string, icon: string) {
     this.messageService.add({
-      severity: MessageType.CUSTOM,
+      severity: MessageTypeEnum.CUSTOM,
       summary: summary,
       detail: detail,
       icon: icon,
@@ -89,7 +72,7 @@ export class MessagesService {
   showTopLeft(summary: string, detail: string, key: string = 'abc') {
     this.messageService.add({
       key: key,
-      severity: MessageType.INFO,
+      severity: MessageTypeEnum.INFO,
       summary: summary,
       detail: detail,
     });
@@ -98,7 +81,7 @@ export class MessagesService {
   showTopCenter(summary: string, detail: string, key: string = 'abc') {
     this.messageService.add({
       key: key,
-      severity: MessageType.WARN,
+      severity: MessageTypeEnum.WARN,
       summary: summary,
       detail: detail,
     });
@@ -107,7 +90,7 @@ export class MessagesService {
   showBottomCenter(summary: string, detail: string, key: string = 'abc') {
     this.messageService.add({
       key: key,
-      severity: MessageType.SUCCESS,
+      severity: MessageTypeEnum.SUCCESS,
       summary: summary,
       detail: detail,
     });
@@ -118,7 +101,7 @@ export class MessagesService {
     this.messageService.add({
       key: key,
       sticky: true,
-      severity: MessageType.SUCCESS,
+      severity: MessageTypeEnum.SUCCESS,
       summary: summary,
       detail: detail,
     });
@@ -130,7 +113,7 @@ export class MessagesService {
 
   showSticky(summary: string, detail: string) {
     this.messageService.add({
-      severity: MessageType.INFO,
+      severity: MessageTypeEnum.INFO,
       summary: summary,
       detail: detail,
       sticky: true,

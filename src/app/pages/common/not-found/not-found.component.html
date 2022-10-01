@@ -8,7 +8,7 @@
     <h1 class="">{{ "server-messages.404.title" | translate }}</h1>
     <span class="">{{ "server-messages.404.message" | translate }}</span>
   </div>
-  <a [routerLink]="envRoutes.COMMON + coreRoutes.HOME">
+  <a [routerLink]="envRoutes.COMMON + '/' + commonRoutes.DASHBOARD">
     <button
       pButton
       type="button"

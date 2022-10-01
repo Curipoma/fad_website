@@ -1,7 +1,7 @@
 <div class="layout-topbar">
   <a
     class="layout-topbar-logo"
-    [routerLink]="envRoutes.COMMON + coreRoutes.HOME"
+    [routerLink]="envRoutes.COMMON + commonRoutes.DASHBOARD"
   >
     <img src="assets/images/logo.png" alt="logo" />
   </a>
@@ -30,15 +30,15 @@
         layoutService.state.profileSidebarVisible
     }"
   >
-    <button class="p-link layout-topbar-button">
+    <button class="p-link layout-topbar-button" (click)="logout()">
       <i class="pi pi-sign-out"></i>
       <span>Log out</span>
     </button>
-    <button class="p-link layout-topbar-button">
+    <button class="p-link layout-topbar-button" (click)="showAccount()">
       <i class="pi pi-user"></i>
       <span>Cuenta</span>
     </button>
-    <button class="p-link layout-topbar-button">
+    <button class="p-link layout-topbar-button" (click)="showSetting()">
       <i class="pi pi-cog"></i>
       <span>Configuraciones</span>
     </button>
