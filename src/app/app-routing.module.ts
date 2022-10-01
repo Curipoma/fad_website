@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent, BlankComponent } from '@layout';
+import { CommonRoutes, EnvRoutes, OtherRoutes } from '@shared/enums';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/common/not-found',
+    redirectTo: CommonRoutes.NOT_FOUND,
   },
 ];
 

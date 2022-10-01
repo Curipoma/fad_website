@@ -22,6 +22,7 @@ export class AssetDetailsFormComponent implements OnInit {
   form: FormGroup = this.newForm;
   loaded$ = this.coreService.loaded$;
   assets: AssetModel[] = [];
+  loaded: boolean = false;
 
   constructor(
     private assetsHttpService: AssetsHttpService,
@@ -37,26 +38,10 @@ export class AssetDetailsFormComponent implements OnInit {
     }
   }
 
-  async onExit(): Promise<boolean> {
-    const onConfirm = () => {};
-    const onReject = () => {};
-    if (this.form.touched || this.form.dirty) {
-      this.messagesService.questionOnExit(
-        'Seguro quieres salir',
-        'Seguro quieres salir, se perderán tus datos',
-        'questionAction',
-        onConfirm,
-        onReject
-      );
-    }
-    return true;
-  }
-
   ngOnInit(): void {
     this.getAssets();
     if (this.id > 0) {
       this.getAssetDetail();
-    } else {
     }
   }
 
@@ -150,9 +135,13 @@ export class AssetDetailsFormComponent implements OnInit {
   }
 
   getAssetDetail() {
-    this.assetDetailsHttpService.show(this.id).subscribe((assetDetail) => {
-      this.form.reset(assetDetail);
-    });
+    this.loaded = true;
+    this.assetDetailsHttpService
+      .show<AssetDetailsModel>(this.id)
+      .subscribe((assetDetail: AssetDetailsModel) => {
+        this.form.reset(assetDetail);
+        this.loaded = false;
+      });
   }
 
   getAssets() {
@@ -161,22 +150,22 @@ export class AssetDetailsFormComponent implements OnInit {
     });
   }
 
-  get asset() {
+  get assetField() {
     return this.form.controls['asset'];
   }
-  get annualExistence() {
+  get annualExistenceField() {
     return this.form.controls['annualExistence'];
   }
-  get code() {
+  get codeField() {
     return this.form.controls['code'];
   }
-  get initialExistence() {
+  get initialExistenceField() {
     return this.form.controls['initialExistence'];
   }
-  get unitValue() {
+  get unitValueField() {
     return this.form.controls['unitValue'];
   }
-  get value() {
+  get valueField() {
     return this.form.controls['value'];
   }
 }

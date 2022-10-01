@@ -1,11 +1,26 @@
 <ul class="layout-menu">
-  <ng-container *ngFor="let item of model; let i = index;">
-    <li app-menuitem *ngIf="!item.separator" [item]="item" [index]="i" [root]="true"></li>
+  <li>
+    <div class="col-12 flex justify-content-between align-items-center">
+      {{ "app.short-title" | translate }}
+      <button
+        class="p-link layout-menu-button layout-topbar-button"
+        (click)="layoutService.onMenuToggle()"
+      >
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <small class="">
+      {{ "app.description" | translate }}
+    </small>
+  </li>
+  <ng-container *ngFor="let item of navRoutes; let i = index">
+    <li
+      app-menuitem
+      *ngIf="!item.separator"
+      [item]="item"
+      [index]="i"
+      [root]="true"
+    ></li>
     <li *ngIf="item.separator" class="menu-separator"></li>
   </ng-container>
-  <li>
-    <a href="https://www.primefaces.org/primeblocks-ng/#/">
-      <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'banner-primeblocks' : 'banner-primeblocks-dark'}}.png" alt="Prime Blocks" class="w-full mt-3"/>
-    </a>
-  </li>
 </ul>

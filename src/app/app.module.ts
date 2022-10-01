@@ -30,10 +30,11 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
-import { ConfigComponent } from './layout/config/config.component';
 import { MenuComponent } from './layout/menu/menu.component';
 import { MenuitemComponent } from './layout/menuitem/menuitem.component';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ConfigComponent } from './layout/config/config.component';
+import { SidebarModule } from 'primeng/sidebar';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -47,9 +48,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BlankComponent,
     MainComponent,
     SidebarComponent,
-    ConfigComponent,
     MenuComponent,
     MenuitemComponent,
+    ConfigComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,8 +79,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ToastModule,
     ReactiveFormsModule,
     ProgressBarModule,
+    SidebarModule,
   ],
-  exports: [TranslateModule],
+  exports: [TranslateModule, ConfigComponent],
   providers: [
     {
       provide: LocationStrategy,

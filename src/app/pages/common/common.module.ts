@@ -7,7 +7,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PageInformationComponent } from './page-information/page-information.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { UnderMaintenanceComponent } from './under-maintenance/under-maintenance.component';
-import {ButtonModule} from "primeng/button";
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -15,6 +15,12 @@ import {ButtonModule} from "primeng/button";
     PageInformationComponent,
     UnderMaintenanceComponent,
   ],
-    imports: [NgCommonModule, CommonRoutingModule, SharedModule, TranslateModule, ButtonModule],
+  imports: [
+    NgCommonModule,
+    CommonRoutingModule,
+    SharedModule,
+    TranslateModule,
+    ButtonModule,
+  ],
 })
 export class CommonModule {}

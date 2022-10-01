@@ -1,4 +1,3 @@
-export * from './core-routes';
-export * from './env-routes';
+export * from './routes.enum';
 export * from './message-keys.enum';
-export * from './message-type';
+export * from './message-type.enum';

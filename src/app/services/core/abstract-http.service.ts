@@ -24,11 +24,11 @@ export abstract class AbstractHttpService {
   ) {}
 
   index<T>(page: number = 0, search: string = ''): Observable<T> {
+    this.coreService.showLoad();
     const headers = new HttpHeaders().append('pagination', 'true');
     const params = new HttpParams()
       .append('page', page)
       .append('search', search);
-    this.coreService.showLoad();
     return this.httpClient
       .get<ServerResponse<T>>(this.resourceUrl, { headers, params })
       .pipe(
@@ -79,11 +79,11 @@ export abstract class AbstractHttpService {
       .pipe(
         map((res) => {
           this.messageService.success(res);
-          this.coreService.hideLoad();
           this.messagesService.showSuccess(
             'Actualizado',
             'Registro ' + id + ' actualizado correctamente'
           );
+          this.coreService.hideLoad();
           return res.data;
         })
       );
@@ -115,11 +115,11 @@ export abstract class AbstractHttpService {
       )
       .pipe(
         map((response) => {
-          this.coreService.hideLoad();
           this.messagesService.showSuccess(
             'Eliminado',
             'Registros eliminados correctamente'
           );
+          this.coreService.hideLoad();
           return response.data;
         })
       );

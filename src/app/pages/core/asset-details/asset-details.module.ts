@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RippleModule } from 'primeng/ripple';
 import { CardModule } from 'primeng/card';
 import { SharedModule } from '@shared/shared.module';
+import {ProgressBarModule} from "primeng/progressbar";
 
 @NgModule({
   declarations: [
@@ -21,18 +22,19 @@ import { SharedModule } from '@shared/shared.module';
     AssetDetailsFormComponent,
     AssetDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    AssetDetailsRoutingModule,
-    TableModule,
-    ButtonModule,
-    PaginatorModule,
-    TranslateModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    RippleModule,
-    CardModule,
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        AssetDetailsRoutingModule,
+        TableModule,
+        ButtonModule,
+        PaginatorModule,
+        TranslateModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        RippleModule,
+        CardModule,
+        SharedModule,
+        ProgressBarModule,
+    ],
 })
 export class AssetDetailsModule {}

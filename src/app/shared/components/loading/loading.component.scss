@@ -1,31 +1,17 @@
-@import "./src/assets/styles/style";
-
-.container-loading {
-  position: absolute;
+.loading-container {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   max-height: 100vh;
   max-width: 100vw;
   width: 100%;
-  z-index: 50;
+  z-index: 1100;
 
-  & .loading {
-    background: $color-fad-blue;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 0;
-    max-width: 100vw;
+  & .loading-gif {
+    max-width: 3rem;
     width: 100%;
-
-    & .loading-text {
-      text-align: center;
-      width: 100%;
-    }
   }
 }

@@ -1,45 +1,51 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CommonRoutes, CoreRoutes } from '@shared/enums';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: 'asset-details',
+    path: CommonRoutes.DASHBOARD,
+    component: DashboardComponent,
+  },
+  {
+    path: CoreRoutes.ASSET_DETAILS,
     loadChildren: () =>
       import('./asset-details/asset-details.module').then(
         (m) => m.AssetDetailsModule
       ),
   },
   {
-    path: 'assets',
+    path: CoreRoutes.ASSETS,
     loadChildren: () =>
       import('./assets/assets.module').then((m) => m.AssetsModule),
   },
   {
-    path: 'catalogue-types',
+    path: CoreRoutes.CATALOGUE_TYPES,
     loadChildren: () =>
       import('./catalogue-types/catalogue-types.module').then(
         (m) => m.CatalogueTypesModule
       ),
   },
   {
-    path: 'catalogues',
+    path: CoreRoutes.CATALOGUES,
     loadChildren: () =>
       import('./catalogues/catalogues.module').then((m) => m.CataloguesModule),
   },
   {
-    path: 'consumables',
+    path: CoreRoutes.CONSUMABLES,
     loadChildren: () =>
       import('./consumables/consumables.module').then(
         (m) => m.ConsumablesModule
       ),
   },
   {
-    path: 'materials',
+    path: CoreRoutes.MATERIALS,
     loadChildren: () =>
       import('./materials/materials.module').then((m) => m.MaterialsModule),
   },
   {
-    path: 'users',
+    path: CoreRoutes.USERS,
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),
   },
