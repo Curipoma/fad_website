@@ -1,1 +1,29 @@
-<p>dashboard works!</p>
+<div class="card">
+  <p-dataView
+    #dv
+    [value]="areas"
+    [paginator]="true"
+    [rows]="9"
+    filterBy="name"
+    [sortField]="sortField"
+    [sortOrder]="sortOrder"
+    layout="grid"
+  >
+    <ng-template pTemplate="header">
+      <div class="flex flex-column md:flex-row md:justify-content-between">
+        Establecimientos
+      </div>
+    </ng-template>
+    <ng-template let-area pTemplate="gridItem">
+      <div class="col-12 md:col-4 p-2">
+        <div class="card">
+          <div class="product-grid-item-content">
+            <h4 class="product-name">{{ area.name }}</h4>
+            <p class="product-description">{{ area.code }}</p>
+            <p class="product-description">{{ area.unitMonetaryValue }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>

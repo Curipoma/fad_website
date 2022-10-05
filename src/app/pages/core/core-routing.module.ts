@@ -1,24 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CommonRoutes, CoreRoutes } from '@shared/enums';
+import { CoreRoutes } from '@shared/enums';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: CommonRoutes.DASHBOARD,
-    component: DashboardComponent,
-  },
-  {
-    path: CoreRoutes.ASSET_DETAILS,
+    path: CoreRoutes.AREAS_LIST,
     loadChildren: () =>
-      import('./asset-details/asset-details.module').then(
-        (m) => m.AssetDetailsModule
-      ),
-  },
-  {
-    path: CoreRoutes.ASSETS,
-    loadChildren: () =>
-      import('./assets/assets.module').then((m) => m.AssetsModule),
+      import('./areas/areas.module').then((m) => m.AreasModule),
   },
   {
     path: CoreRoutes.CATALOGUE_TYPES,
@@ -33,11 +22,8 @@ const routes: Routes = [
       import('./catalogues/catalogues.module').then((m) => m.CataloguesModule),
   },
   {
-    path: CoreRoutes.CONSUMABLES,
-    loadChildren: () =>
-      import('./consumables/consumables.module').then(
-        (m) => m.ConsumablesModule
-      ),
+    path: CoreRoutes.DASHBOARD,
+    component: DashboardComponent,
   },
   {
     path: CoreRoutes.MATERIALS,

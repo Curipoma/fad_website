@@ -23,19 +23,34 @@
       "message": "Route Under Maintenance"
     }
   },
-  "AssetDetailsList": {
-    "title": "Detalles de Activos",
-    "summary": "Detalles de cada activo",
-    "detail": "Puedes crear uno de estos registros para asociar a un activo"
+  "AreasList": {
+    "title": "Áreas",
+    "summary": "Áreas",
+    "detail": "Puedes crear una área"
   },
-  "AssetsList": {
-    "title": "Activos",
-    "summary": "Activos",
-    "detail": "Puedes crear un activo"
+  "MaterialsList": {
+    "title": "Materiales",
+    "summary": "Materiales",
+    "detail": "Puedes crear un material"
   },
-  "ConsumablesList": {
-    "title": "Consumibles",
-    "summary": "Consumibles",
-    "detail": "Puedes crear un consumibles"
+  "CataloguesList": {
+    "title": "Catálogos",
+    "summary": "Catálogos",
+    "detail": "Puedes crear un catálogo"
+  },
+  "CatalogueTypesList": {
+    "title": "Tipos de catálogo",
+    "summary": "Tipos de catálogo",
+    "detail": "Puedes crear un tipo de catálogo"
+  },
+  "UsersList": {
+    "title": "Usuarios",
+    "summary": "Usuarios",
+    "detail": "Puedes crear un usuario"
+  },
+  "UsersForm": {
+    "title": "Usuarios",
+    "summary": "Usuarios",
+    "detail": "Puedes crear un usuario"
   }
 }

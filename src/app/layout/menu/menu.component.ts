@@ -20,22 +20,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Inicio',
             icon: 'pi pi-fw pi-home',
-            routerLink: [EnvRoutes.CORE + '/' + CommonRoutes.DASHBOARD],
-          },
-        ],
-      },
-      {
-        label: 'Activos',
-        items: [
-          {
-            label: 'Activos',
-            icon: 'pi pi-fw pi-list',
-            routerLink: [EnvRoutes.CORE + '/' + CoreRoutes.ASSETS_LIST],
-          },
-          {
-            label: 'Detalles de Activo',
-            icon: 'pi pi-fw pi-list',
-            routerLink: [EnvRoutes.CORE + '/' + CoreRoutes.ASSET_DETAILS_LIST],
+            routerLink: [EnvRoutes.CORE + '/' + CoreRoutes.DASHBOARD],
           },
         ],
       },
@@ -60,9 +45,9 @@ export class MenuComponent implements OnInit {
         label: 'Administrar',
         items: [
           {
-            label: 'Consumibles',
+            label: 'Áreas',
             icon: 'pi pi-fw pi-list',
-            routerLink: [EnvRoutes.CORE + '/' + CoreRoutes.CONSUMABLES_LIST],
+            routerLink: [EnvRoutes.CORE + '/' + CoreRoutes.AREAS_LIST],
           },
           {
             label: 'Materiales',

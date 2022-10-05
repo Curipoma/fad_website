@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { PermissionModel, RoleModel, UserModel } from '@models/auth';
 import { environment } from '@env/environment';
+import { CoreRoutes, EnvRoutes } from '@shared/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -58,7 +59,9 @@ export class AuthService {
   redirectUser() {
     this.login$.subscribe(async (isLoggedIn) => {
       if (!isLoggedIn) {
-        await this.router.navigate(['/common/page']);
+        await this.router.navigate([
+          EnvRoutes.CORE + '/' + CoreRoutes.DASHBOARD,
+        ]);
       }
     });
   }

@@ -91,7 +91,6 @@ export abstract class AbstractHttpService {
 
   delete<T>(id: number): Observable<T> {
     this.coreService.showLoad();
-    console.log('deleted ' + id);
     return this.httpClient
       .delete<ServerResponse<T>>(this.resourceUrl.concat(`/${id.toString()}`))
       .pipe(

@@ -35,6 +35,7 @@ import { MenuitemComponent } from './layout/menuitem/menuitem.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ConfigComponent } from './layout/config/config.component';
 import { SidebarModule } from 'primeng/sidebar';
+import {BadgeModule} from "primeng/badge";
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -43,14 +44,14 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    TopBarComponent,
     BlankComponent,
+    ConfigComponent,
+    FooterComponent,
     MainComponent,
-    SidebarComponent,
     MenuComponent,
     MenuitemComponent,
-    ConfigComponent,
+    SidebarComponent,
+    TopBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +76,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PasswordModule,
     InputTextModule,
     RippleModule,
+    BadgeModule,
     MessagesModule,
     ToastModule,
     ReactiveFormsModule,

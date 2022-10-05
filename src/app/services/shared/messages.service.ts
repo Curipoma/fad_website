@@ -23,8 +23,8 @@ export class MessagesService {
     summary: string = '',
     detail: string = '',
     key: string = '',
-    onConfirm: Function,
-    onReject: Function
+    onConfirm: Function = () => {},
+    onReject: Function = () => {}
   ): void {
     this.confirm = onConfirm;
     this.reject = onReject;

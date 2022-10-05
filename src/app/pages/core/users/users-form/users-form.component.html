@@ -1,1 +1,110 @@
-<p>users-form works!</p>
+<div *ngIf="!(loaded$ | async)" class="flex-auto card p-fluid col-12">
+  <div class="col-12">
+    <p-progressBar mode="indeterminate" [hidden]="!loaded"></p-progressBar>
+  </div>
+  <div class="flex justify-content-between align-items-center p-fluid col-12">
+    <h3 *ngIf="!id">Crear Usuario</h3>
+    <h3 *ngIf="id">Actualizar Usuario {{ id }}</h3>
+    <div class="col-fixed">
+      <button
+        pButton
+        *ngIf="id > 0"
+        type="button"
+        label="Recargar"
+        class="p-button-info"
+        icon="pi pi-refresh"
+        (click)="ngOnInit()"
+      ></button>
+    </div>
+  </div>
+  <form class="p-fluid grid col-12" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="p-fluid grid">
+      <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+        <span class="p-float-label">
+          <input id="email" type="text" pInputText formControlName="email" />
+          <label for="email">Correo</label>
+        </span>
+        <small
+          appErrorMessage
+          [errors]="emailField.errors"
+          [touched]="emailField.touched"
+          [dirty]="emailField.dirty"
+        ></small>
+      </div>
+
+      <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+        <span class="p-float-label">
+          <input id="name" type="text" pInputText formControlName="name" />
+          <label for="name">Name</label>
+        </span>
+        <small
+          appErrorMessage
+          [errors]="nameField.errors"
+          [touched]="nameField.touched"
+          [dirty]="nameField.dirty"
+        ></small>
+      </div>
+
+      <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+        <span class="p-float-label">
+          <input
+            id="lastname"
+            type="text"
+            pInputText
+            formControlName="lastname"
+          />
+          <label for="lastname">Apellido</label>
+        </span>
+        <small
+          appErrorMessage
+          [errors]="lastnameField.errors"
+          [touched]="lastnameField.touched"
+          [dirty]="lastnameField.dirty"
+        ></small>
+      </div>
+
+      <div class="field col-12 sm:col-6 md:col-4 lg:col-3">
+        <span class="p-float-label">
+          <input
+            id="password"
+            type="text"
+            pInputText
+            formControlName="password"
+          />
+          <label for="password">Clave</label>
+        </span>
+        <small
+          appErrorMessage
+          [errors]="passwordField.errors"
+          [touched]="passwordField.touched"
+          [dirty]="passwordField.dirty"
+        ></small>
+      </div>
+
+      <div class="p-fluid d-flex justify-content-center col-12">
+        <div class="p-fluid col-fixed">
+          <button
+            pButton
+            type="submit"
+            icon="pi pi-save"
+            class="p-button p-button-success"
+            label="Guardar"
+          ></button>
+        </div>
+        <div class="p-fluid col-fixed">
+          <button
+            pButton
+            type="button"
+            icon="pi pi-chevron-left"
+            class="p-button p-button-warning"
+            label="Cancelar"
+            (click)="back()"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="(loaded$ | async)!" class="field col-12">
+      <app-progress-bar [message]="'mesage de prueba'"></app-progress-bar>
+    </div>
+  </form>
+</div>
