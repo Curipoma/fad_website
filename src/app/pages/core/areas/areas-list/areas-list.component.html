@@ -1,0 +1,156 @@
+<div class="flex-auto card p-fluid col-12">
+  <p-progressBar mode="indeterminate" [hidden]="!loaded"></p-progressBar>
+  <p-table
+    dataKey="id"
+    styleClass="p-datatable-striped"
+    [value]="areas"
+    [columns]="columns"
+    [(selection)]="selectedAreas"
+    [responsive]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div
+        class="flex-auto md:flex align-items-center justify-content-between"
+      >
+        <h1>{{ "AreasList.title" | translate }}</h1>
+        <div class="flex-auto md:flex md:justify-content-end">
+          <div class="col-fixed">
+            <button
+              pButton
+              *ngIf="selectedAreas.length > 0"
+              type="button"
+              label="Eliminar Detalles de Activos"
+              class="p-button-danger"
+              icon="pi pi-trash"
+              (click)="removeAll()"
+            ></button>
+          </div>
+          <div class="col-fixed">
+            <span class="p-float-label p-input-icon-right">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                id="float-input"
+                type="text"
+                [formControl]="search"
+              />
+              <label for="float-input">
+                {{ "actions.search" | translate }}</label
+              >
+            </span>
+          </div>
+          <div class="col-fixed">
+            <button
+              pButton
+              type="button"
+              label="Crear Detalle de Activo"
+              class="p-button-success"
+              icon="pi pi-plus"
+              (click)="redirectCreateForm()"
+            ></button>
+          </div>
+          <div class="col-fixed">
+            <p-button icon="pi pi-refresh" (click)="getAreas()"></p-button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th>
+          <button
+            pButton
+            pRipple
+            type="button"
+            class="p-button-info p-button-rounded"
+            icon="pi pi-cog"
+          ></button>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-rowData
+      let-columns="columns"
+      let-rowIndex="rowIndex"
+    >
+      <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex">
+        <td>
+          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+        </td>
+        <td *ngFor="let col of columns">
+          <div class="flex-auto lg:hidden strong">
+            <span>{{ col.header }}</span>
+          </div>
+          <div [ngSwitch]="col.field">
+            <div *ngSwitchCase="'materials'" class="d-flex flex-column">
+              <span
+                *ngFor="let material of rowData[col.field]; let indice = index"
+              >
+                {{ indice + 1 }}. {{ material.description }}
+              </span>
+              <span *ngIf="rowData[col.field].length === 0">-</span>
+            </div>
+            <span *ngSwitchCase="'createdAt'">
+              {{ (rowData[col.field] | date) ?? "-" }}
+            </span>
+            <span *ngSwitchCase="'updatedAt'">
+              {{ (rowData[col.field] | date) ?? "-" }}
+            </span>
+            <span *ngSwitchCase="'deletedAt'">
+              {{ (rowData[col.field] | date) ?? "-" }}
+            </span>
+            <span *ngSwitchDefault>{{ rowData[col.field] }}</span>
+          </div>
+        </td>
+        <td>
+          <span class="flex-auto lg:hidden strong">Opciones</span>
+          <div class="flex-auto">
+            <div class="col-fixed">
+              <button
+                pButton
+                type="button"
+                [label]="'actions.delete' | translate"
+                icon="pi pi-trash"
+                (click)="remove(rowData.id)"
+                class="p-button-danger"
+              ></button>
+            </div>
+            <div class="col-fixed">
+              <button
+                pButton
+                type="button"
+                [label]="'actions.details' | translate"
+                icon="pi pi-pencil"
+                class="p-button-info"
+                (click)="redirectEditForm(rowData.id)"
+              ></button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      {{ messageCustomizationService.paginatorTotalRegisters(paginator) }}
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columns.length">
+          {{ messageCustomizationService.paginatorTotalRegisters(paginator) }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator
+    [rows]="paginator.limit"
+    [totalRecords]="paginator.totalItems"
+    (onPageChange)="paginate($event)"
+  ></p-paginator>
+</div>

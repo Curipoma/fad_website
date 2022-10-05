@@ -2,13 +2,10 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { CoreService } from '@services/core/core.service';
 import { HttpClient } from '@angular/common/http';
-import {
-  AbstractHttpService,
-  MessageCustomizationService,
-} from '@services/core';
+import { MessageCustomizationService } from '@services/core';
 import { MessagesService } from '@services/shared';
-import {map, Observable} from "rxjs";
-import {ServerResponse} from "@models/http";
+import { map, Observable } from 'rxjs';
+import { ServerResponse } from '@models/http';
 
 @Injectable({
   providedIn: 'root',

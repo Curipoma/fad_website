@@ -36,7 +36,6 @@ export class ErrorMessageDirective {
 
   setMessage() {
     if (this._touched || this._dirty) {
-      console.log(this._errors);
       if (this._errors) {
         if (this._errors['required']) {
           this.nativeElement.innerText = this.messageService.fieldRequired;

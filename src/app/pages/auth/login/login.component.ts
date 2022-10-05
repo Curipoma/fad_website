@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { LayoutService } from '@services/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginHttpService } from '@services/auth/login-http.service';
+import { AuthService } from '@services/auth';
+import { LoginResponseModel } from '@models/http';
+import { Router } from '@angular/router';
+import { CoreRoutes, EnvRoutes } from '@shared/enums';
 
 @Component({
   selector: 'app-login',
@@ -33,9 +37,11 @@ export class LoginComponent {
   password!: string;
 
   constructor(
+    private authService: AuthService,
     public layoutService: LayoutService,
     private formBuilder: FormBuilder,
-    private loginHttpService: LoginHttpService
+    private loginHttpService: LoginHttpService,
+    private router: Router
   ) {}
 
   get newForm(): FormGroup {
@@ -61,10 +67,16 @@ export class LoginComponent {
   }
 
   ngSubmit() {
-    console.log(this.form.value)
     if (this.form.valid) {
-      this.loginHttpService.login(this.form.value).subscribe((response) => {
-        console.log(response)});
+      this.loginHttpService
+        .login<LoginResponseModel, LoginResponseModel>(this.form.value)
+        .subscribe((res) => {
+          this.authService.token = res.accessToken;
+          this.router.navigate([EnvRoutes.CORE + '/' + CoreRoutes.DASHBOARD]);
+          this.authService.isLoggedIn = true;
+          this.authService.permissions = [];
+          this.authService.roles = [];
+        });
     }
   }
 }

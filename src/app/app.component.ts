@@ -46,8 +46,6 @@ export class AppComponent implements OnInit, OnDestroy {
             'document',
             'click',
             (event) => {
-              console.log(this.appSidebar);
-
               const isOutsideClicked = !(
                 this.appSidebar.el.nativeElement.isSameNode(event.target) ||
                 this.appSidebar.el.nativeElement.contains(event.target) ||
