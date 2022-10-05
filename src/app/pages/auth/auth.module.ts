@@ -6,6 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import { SettingsComponent } from './settings/settings.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {PasswordModule} from "primeng/password";
+import {CheckboxModule} from "primeng/checkbox";
+import {ButtonModule} from "primeng/button";
+import {RippleModule} from "primeng/ripple";
 
 
 @NgModule({
@@ -17,7 +23,14 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    PasswordModule,
+    CheckboxModule,
+    ButtonModule,
+    RippleModule,
+    FormsModule
   ]
 })
 export class AuthModule { }
